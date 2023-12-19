@@ -3,7 +3,7 @@
 /*
  * This file is part of SeAT
  *
- * Copyright (C) 2015 to 2021 Leon Jacobs
+ * Copyright (C) 2015 to 2022 Leon Jacobs
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,8 +25,7 @@ if (! function_exists('carbon')) {
     /**
      * A helper to get a fresh instance of Carbon.
      *
-     * @param null $data
-     *
+     * @param  null  $data
      * @return \Carbon\Carbon
      */
     function carbon($data = null)

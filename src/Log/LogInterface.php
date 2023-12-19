@@ -3,7 +3,7 @@
 /*
  * This file is part of SeAT
  *
- * Copyright (C) 2015 to 2021 Leon Jacobs
+ * Copyright (C) 2015 to 2022 Leon Jacobs
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,34 +24,31 @@ namespace Seat\Eseye\Log;
 
 /**
  * Interface LogInterface.
+ *
  * @package Seat\Eseye\Log
  */
 interface LogInterface
 {
     /**
-     * @param string $message
-     *
+     * @param  string  $message
      * @return mixed
      */
     public function log(string $message);
 
     /**
-     * @param string $message
-     *
+     * @param  string  $message
      * @return mixed
      */
     public function debug(string $message);
 
     /**
-     * @param string $message
-     *
+     * @param  string  $message
      * @return mixed
      */
     public function warning(string $message);
 
     /**
-     * @param string $message
-     *
+     * @param  string  $message
      * @return mixed
      */
     public function error(string $message);

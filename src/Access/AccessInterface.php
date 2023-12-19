@@ -3,7 +3,7 @@
 /*
  * This file is part of SeAT
  *
- * Copyright (C) 2015 to 2021 Leon Jacobs
+ * Copyright (C) 2015 to 2022 Leon Jacobs
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,15 +24,15 @@ namespace Seat\Eseye\Access;
 
 /**
  * Interface AccessInterface.
+ *
  * @package Seat\Eseye\Access
  */
 interface AccessInterface
 {
     /**
-     * @param string $method
-     * @param string $uri
-     * @param array  $scopes
-     *
+     * @param  string  $method
+     * @param  string  $uri
+     * @param  array  $scopes
      * @return bool|mixed
      */
     public function can(string $method, string $uri, array $scopes): bool;

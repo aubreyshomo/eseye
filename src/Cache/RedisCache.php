@@ -3,7 +3,7 @@
 /*
  * This file is part of SeAT
  *
- * Copyright (C) 2015 to 2021 Leon Jacobs
+ * Copyright (C) 2015 to 2022 Leon Jacobs
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,12 +22,14 @@
 
 namespace Seat\Eseye\Cache;
 
+use Carbon\Carbon;
 use Predis\Client;
 use Seat\Eseye\Configuration;
 use Seat\Eseye\Containers\EsiResponse;
 
 /**
  * Class RedisCache.
+ *
  * @package Seat\Eseye\Cache
  */
 class RedisCache implements CacheInterface
@@ -43,7 +45,7 @@ class RedisCache implements CacheInterface
     /**
      * RedisCache constructor.
      *
-     * @param \Predis\Client $redis
+     * @param  \Predis\Client  $redis
      *
      * @throws \Seat\Eseye\Exceptions\InvalidContainerDataException
      */
@@ -67,22 +69,21 @@ class RedisCache implements CacheInterface
     }
 
     /**
-     * @param string                             $uri
-     * @param string                             $query
-     * @param \Seat\Eseye\Containers\EsiResponse $data
-     *
+     * @param  string  $uri
+     * @param  string  $query
+     * @param  \Seat\Eseye\Containers\EsiResponse  $data
      * @return void
      */
     public function set(string $uri, string $query, EsiResponse $data)
     {
 
-        $this->redis->set($this->buildCacheKey($uri, $query), serialize($data));
+        $ttl = $data->expires()->timestamp - Carbon::now('UTC')->timestamp;
+        $this->redis->setex($this->buildCacheKey($uri, $query), $ttl > 0 ? $ttl : 10, serialize($data));
     }
 
     /**
-     * @param string $uri
-     * @param string $query
-     *
+     * @param  string  $uri
+     * @param  string  $query
      * @return string
      */
     public function buildCacheKey(string $uri, string $query = ''): string
@@ -95,9 +96,8 @@ class RedisCache implements CacheInterface
     }
 
     /**
-     * @param string $uri
-     * @param string $query
-     *
+     * @param  string  $uri
+     * @param  string  $query
      * @return \Seat\Eseye\Containers\EsiResponse|bool
      */
     public function get(string $uri, string $query = '')
@@ -121,9 +121,8 @@ class RedisCache implements CacheInterface
     }
 
     /**
-     * @param string $uri
-     * @param string $query
-     *
+     * @param  string  $uri
+     * @param  string  $query
      * @return bool|mixed
      */
     public function has(string $uri, string $query = ''): bool
@@ -133,9 +132,8 @@ class RedisCache implements CacheInterface
     }
 
     /**
-     * @param string $uri
-     * @param string $query
-     *
+     * @param  string  $uri
+     * @param  string  $query
      * @return mixed
      */
     public function forget(string $uri, string $query = '')

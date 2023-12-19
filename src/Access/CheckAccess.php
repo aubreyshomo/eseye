@@ -3,7 +3,7 @@
 /*
  * This file is part of SeAT
  *
- * Copyright (C) 2015 to 2021 Leon Jacobs
+ * Copyright (C) 2015 to 2022 Leon Jacobs
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@ use Seat\Eseye\Configuration;
 
 /**
  * Class CheckAccess.
+ *
  * @package Seat\Eseye\Access
  */
 class CheckAccess implements AccessInterface
@@ -81,6 +82,9 @@ class CheckAccess implements AccessInterface
             '/characters/{character_id}/contracts/'                           => 'esi-contracts.read_character_contracts.v1',
             '/characters/{character_id}/contracts/{contract_id}/items/'       => 'esi-contracts.read_character_contracts.v1',
             '/characters/{character_id}/contracts/{contract_id}/bids/'        => 'esi-contracts.read_character_contracts.v1',
+            '/contracts/public/{region_id}/'                                  => 'public',
+            '/contracts/public/bids/{contract_id}/'                           => 'public',
+            '/contracts/public/items/{contract_id}/'                          => 'public',
             '/corporations/{corporation_id}/contracts/'                       => 'esi-contracts.read_corporation_contracts.v1',
             '/corporations/{corporation_id}/contracts/{contract_id}/items/'   => 'esi-contracts.read_corporation_contracts.v1',
             '/corporations/{corporation_id}/contracts/{contract_id}/bids/'    => 'esi-contracts.read_corporation_contracts.v1',
@@ -258,11 +262,11 @@ class CheckAccess implements AccessInterface
     ];
 
     /**
-     * @param string $method
-     * @param string $uri
-     * @param array  $scopes
-     *
+     * @param  string  $method
+     * @param  string  $uri
+     * @param  array  $scopes
      * @return bool|mixed
+     *
      * @throws \Seat\Eseye\Exceptions\InvalidContainerDataException
      */
     public function can(string $method, string $uri, array $scopes): bool

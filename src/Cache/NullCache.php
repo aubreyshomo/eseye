@@ -3,7 +3,7 @@
 /*
  * This file is part of SeAT
  *
- * Copyright (C) 2015 to 2021 Leon Jacobs
+ * Copyright (C) 2015 to 2022 Leon Jacobs
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,15 +26,15 @@ use Seat\Eseye\Containers\EsiResponse;
 
 /**
  * Class NullCache.
+ *
  * @package Seat\Eseye\Cache
  */
 class NullCache implements CacheInterface
 {
     /**
-     * @param string                             $uri
-     * @param string                             $query
-     * @param \Seat\Eseye\Containers\EsiResponse $data
-     *
+     * @param  string  $uri
+     * @param  string  $query
+     * @param  \Seat\Eseye\Containers\EsiResponse  $data
      * @return mixed
      */
     public function set(string $uri, string $query, EsiResponse $data)
@@ -43,9 +43,8 @@ class NullCache implements CacheInterface
     }
 
     /**
-     * @param string $uri
-     * @param string $query
-     *
+     * @param  string  $uri
+     * @param  string  $query
      * @return \Seat\Eseye\Containers\EsiResponse|bool
      */
     public function get(string $uri, string $query = '')
@@ -55,9 +54,8 @@ class NullCache implements CacheInterface
     }
 
     /**
-     * @param string $uri
-     * @param string $query
-     *
+     * @param  string  $uri
+     * @param  string  $query
      * @return mixed
      */
     public function forget(string $uri, string $query = '')
@@ -66,9 +64,8 @@ class NullCache implements CacheInterface
     }
 
     /**
-     * @param string $uri
-     * @param string $query
-     *
+     * @param  string  $uri
+     * @param  string  $query
      * @return bool|mixed
      */
     public function has(string $uri, string $query = ''): bool

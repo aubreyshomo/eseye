@@ -3,7 +3,7 @@
 /*
  * This file is part of SeAT
  *
- * Copyright (C) 2015 to 2021 Leon Jacobs
+ * Copyright (C) 2015 to 2022 Leon Jacobs
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,13 +24,13 @@ namespace Seat\Eseye\Log;
 
 /**
  * Class NullLogger.
+ *
  * @package Seat\Eseye\Log
  */
 class NullLogger implements LogInterface
 {
     /**
-     * @param string $message
-     *
+     * @param  string  $message
      * @return mixed
      */
     public function log(string $message)
@@ -39,8 +39,7 @@ class NullLogger implements LogInterface
     }
 
     /**
-     * @param string $message
-     *
+     * @param  string  $message
      * @return mixed
      */
     public function debug(string $message)
@@ -49,8 +48,7 @@ class NullLogger implements LogInterface
     }
 
     /**
-     * @param string $message
-     *
+     * @param  string  $message
      * @return mixed
      */
     public function warning(string $message)
@@ -59,8 +57,7 @@ class NullLogger implements LogInterface
     }
 
     /**
-     * @param string $message
-     *
+     * @param  string  $message
      * @return mixed
      */
     public function error(string $message)

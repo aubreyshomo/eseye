@@ -3,7 +3,7 @@
 /*
  * This file is part of SeAT
  *
- * Copyright (C) 2015 to 2021 Leon Jacobs
+ * Copyright (C) 2015 to 2022 Leon Jacobs
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,6 +27,7 @@ use Carbon\Carbon;
 
 /**
  * Class EsiResponse.
+ *
  * @package Seat\Eseye\Containers
  */
 class EsiResponse extends ArrayObject
@@ -85,10 +86,10 @@ class EsiResponse extends ArrayObject
     /**
      * EsiResponse constructor.
      *
-     * @param string $data
-     * @param array  $headers
-     * @param string $expires
-     * @param int    $response_code
+     * @param  string  $data
+     * @param  array  $headers
+     * @param  string  $expires
+     * @param  int  $response_code
      */
     public function __construct(
         string $data, array $headers, string $expires, int $response_code)
@@ -120,6 +121,10 @@ class EsiResponse extends ArrayObject
                 $this->error_message .= ': ' . $data->error_description;
         }
 
+        // If the query failed to contact the ESI endpoint
+        if ($this->response_code === 502)
+            $this->error_message = 'Bad gateway';
+
         // Run the parent constructor
         parent::__construct(is_array($data) ? (array) $data : (object) $data, ArrayObject::ARRAY_AS_PROPS);
     }
@@ -131,7 +136,7 @@ class EsiResponse extends ArrayObject
      * and X-Pages are automatically mapped to properties in this
      * object.
      *
-     * @param array $headers
+     * @param  array  $headers
      */
     private function parseHeaders(array $headers)
     {
@@ -165,8 +170,7 @@ class EsiResponse extends ArrayObject
      * A helper method when a key might not exist within the
      * response object.
      *
-     * @param string $index
-     *
+     * @param  string  $index
      * @return mixed
      */
     public function optional(string $index)
@@ -247,7 +251,7 @@ class EsiResponse extends ArrayObject
     }
 
     /**
-     * @param string $name
+     * @param  string  $name
      * @return bool
      */
     public function hasHeader(string $name)
@@ -260,7 +264,7 @@ class EsiResponse extends ArrayObject
     }
 
     /**
-     * @param string $name
+     * @param  string  $name
      * @return mixed|null
      */
     public function getHeader(string $name)
@@ -279,7 +283,7 @@ class EsiResponse extends ArrayObject
     }
 
     /**
-     * @param \Carbon\Carbon $date
+     * @param  \Carbon\Carbon  $date
      */
     public function setExpires(Carbon $date)
     {
